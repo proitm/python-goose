@@ -72,10 +72,10 @@ class Configuration(object):
 
         # used as the user agent that
         # is sent with your web requests to extract an article
-        # self.browser_user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2)"\
-        #                         " AppleWebKit/534.52.7 (KHTML, like Gecko) "\
-        #                         "Version/5.1.2 Safari/534.52.7"
-        self.browser_user_agent = 'Goose/%s' % __version__
+        self.browser_user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2)"\
+                                  " AppleWebKit/534.52.7 (KHTML, like Gecko) "\
+                                  "Version/5.1.2 Safari/534.52.7"
+        # self.browser_user_agent = 'Goose/%s' % __version__
 
         # debug mode
         # enable this to have additional debugging information
@@ -90,7 +90,7 @@ class Configuration(object):
 
         # Parser type
         self.available_parsers = AVAILABLE_PARSERS.keys()
-        self.parser_class = 'lxml'
+        self.parser_class = 'soup'
 
         # set the local storage path
         # make this configurable
