@@ -56,6 +56,9 @@ class Article(object):
         # is a candidate for the main body of the article
         self.top_node = None
 
+        # Holds the top Element before post-cleanup
+        self.raw_top_node = None
+
         # holds the top Image object that
         # we think represents this article
         self.top_image = None

@@ -184,6 +184,7 @@ class Crawler(object):
                 self.get_image()
 
             # post cleanup
+            self.article.raw_top_node = deepcopy(self.article.top_node)
             self.article.top_node = self.extractor.post_cleanup()
 
             # clean_text
