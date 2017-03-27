@@ -24,6 +24,8 @@ from copy import deepcopy
 
 from goose.extractors import BaseExtractor
 
+import lxml
+
 
 KNOWN_ARTICLE_CONTENT_TAGS = [
     {'attr': 'itemprop', 'value': 'articleBody'},
@@ -89,13 +91,19 @@ class ContentExtractor(BaseExtractor):
         return self.config.target_language
 
     def get_known_article_tags(self):
+        content_length = 2000
+        full_length = len(self.article.raw_html)
+        result = self.article.doc
         for item in KNOWN_ARTICLE_CONTENT_TAGS:
             nodes = self.parser.getElementsByTag(
                             self.article.doc,
                             **item)
-            if len(nodes):
-                return nodes[0]
-        return None
+            for node in nodes:
+                tl = len(lxml.html.tostring(node))
+                if tl < full_length and tl > content_length:
+                    result = node
+                    content_length = tl
+        return result
 
     def is_articlebody(self, node):
         for item in KNOWN_ARTICLE_CONTENT_TAGS:

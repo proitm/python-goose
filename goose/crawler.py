@@ -41,6 +41,8 @@ from goose.outputformatters import StandardOutputFormatter
 
 from goose.network import HtmlFetcher
 
+import lxml
+
 
 class CrawlCandidate(object):
 

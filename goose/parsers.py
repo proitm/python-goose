@@ -75,17 +75,22 @@ class Parser(object):
         return None
 
     @classmethod
-    def getElementsByTag(self, node, tag=None, attr=None, value=None, childs=False):
+    def getElementsByTag(self, node, tag=None, attr=None, value=None, childs=False, debug=False):
         NS = "http://exslt.org/regular-expressions"
         # selector = tag or '*'
         selector = 'descendant-or-self::%s' % (tag or '*')
         if attr and value:
             selector = '%s[re:test(@%s, "%s", "i")]' % (selector, attr, value)
+        if debug:
+            print selector, lxml.html.tostring(node)
         elems = node.xpath(selector, namespaces={"re": NS})
         # remove the root node
         # if we have a selection tag
         if node in elems and (tag or childs):
             elems.remove(node)
+        if debug:
+            if elems:
+                print lxml.html.tostring(elems[0])
         return elems
 
     @classmethod
