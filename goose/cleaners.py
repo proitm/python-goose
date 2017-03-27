@@ -22,6 +22,8 @@ limitations under the License.
 """
 from goose.utils import ReplaceSequence
 
+import lxml
+
 
 class DocumentCleaner(object):
 
@@ -138,17 +140,23 @@ class DocumentCleaner(object):
         # ids
         naughty_list = self.parser.xpath_re(doc, self.nauthy_ids_re)
         for node in naughty_list:
-            self.parser.remove(node)
+            tl = len([item for item in node.itertext()])
+            if tl < 5:
+                self.parser.remove(node)
 
         # class
         naughty_classes = self.parser.xpath_re(doc, self.nauthy_classes_re)
         for node in naughty_classes:
-            self.parser.remove(node)
+            tl = len([item for item in node.itertext()])
+            if tl < 5:
+                self.parser.remove(node)
 
         # name
         naughty_names = self.parser.xpath_re(doc, self.nauthy_names_re)
         for node in naughty_names:
-            self.parser.remove(node)
+            tl = len([item for item in node.itertext()])
+            if tl < 5:
+                self.parser.remove(node)
 
         return doc
 
@@ -174,6 +182,7 @@ class DocumentCleaner(object):
         nodes_to_return = []
         nodes_to_remove = []
         childs = self.parser.childNodesWithText(div)
+        # print childs
 
         for kid in childs:
             # node is a p

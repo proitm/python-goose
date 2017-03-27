@@ -82,15 +82,15 @@ class Parser(object):
         if attr and value:
             selector = '%s[re:test(@%s, "%s", "i")]' % (selector, attr, value)
         if debug:
-            print selector, lxml.html.tostring(node)
+            print selector
         elems = node.xpath(selector, namespaces={"re": NS})
         # remove the root node
         # if we have a selection tag
         if node in elems and (tag or childs):
             elems.remove(node)
-        if debug:
-            if elems:
-                print lxml.html.tostring(elems[0])
+        # if debug:
+        #     if elems:
+        #         print lxml.html.tostring(elems[0])
         return elems
 
     @classmethod

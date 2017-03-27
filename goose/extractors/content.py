@@ -91,18 +91,19 @@ class ContentExtractor(BaseExtractor):
         return self.config.target_language
 
     def get_known_article_tags(self):
-        content_length = 2000
+        content_length = 500
         full_length = len(self.article.raw_html)
-        result = self.article.doc
+        result = None
         for item in KNOWN_ARTICLE_CONTENT_TAGS:
             nodes = self.parser.getElementsByTag(
                             self.article.doc,
                             **item)
             for node in nodes:
-                tl = len(lxml.html.tostring(node))
+                tl = len("".join(node.itertext()))
                 if tl < full_length and tl > content_length:
                     result = node
                     content_length = tl
+        # print lxml.html.tostring(result)[:1000]
         return result
 
     def is_articlebody(self, node):
