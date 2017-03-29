@@ -73,6 +73,7 @@ KNOWN_ARTICLE_CONTENT_TAGS = [
     {'attr': 'class', 'value': 'cem-blog-left'},
     {'attr': 'class', 'value': 'content'},
     {'attr': 'class', 'value': 'post'},
+    {'attr': 'class', 'value': 'blogger'},
 ]
 
 
